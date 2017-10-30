@@ -33,18 +33,30 @@ router.get('/', function(req, res, next) {
  //res.send('You have clicked to view the ClimbData.');
   
   ClimbData.find({}, function(err, climbdatas){
-        if(err){
-            res.send(err);
-            return console.error(err);
-        }
+    if(err){
+        res.send(err);
+        return console.error(err);
+    }
       
-      var output = "";
+    var output = "";
       
-      for(var climbdata in climbdatas){
-          output += climbdata;
-        }
+    climbdatas.forEach(function(climbdata){
+        console.log(climbdata.weight);
+        output += "Weight: " + climbdata.weight + "<br/>";
+    });
       
-      res.send(climbdata);
+    //for(var i = 0; i < climbdatas.length; i++){
+    //    console.log(climbdatas[i].weight);
+    //    output += climbdatas[i].weight + "<br/>";
+    //}
+      
+     //for(var climbdata in climbdatas){
+       //   console.log(climbdata.weight);
+        //  output += climbdata.weight;
+        //}
+    
+    //res.send(output);  
+    res.render('index',{ answer: climbdatas});
       
   });
 });
