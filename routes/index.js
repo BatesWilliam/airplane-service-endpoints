@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
-var connectionstring = "mongodb://cidm4382:cidm4382@ds157624.mlab.com:57624/cidm4382";
+var connectionstring = "mongodb://REDACTED:REDACTED@ds157624.mlab.com:57624/cidm4382";
 mongoose.connect(connectionstring, { useMongoClient: true });
 
 mongoose.Promise = global.Promise;
@@ -41,9 +41,21 @@ var takeoffDataSchema = new mongoose.Schema({
 	"altitude10000V2": String
 });
 
+var airportDataSchema = new mongoose.Schema({
+	"IATA": String,
+    "ICAO": String,
+    "airportName": String,
+    "airportCity": String,
+    "airportLatitude": Number,
+    "airportLongitude": Number,
+    "airportElevation": Number,
+    "runways": Array
+});
+
 var ClimbData = mongoose.model('ClimbData', climbDataSchema, 'ClimbData');
 var LandingData = mongoose.model('LandingData', landingDataSchema, 'LandingData');
 var TakeoffData = mongoose.model('TakeoffData', takeoffDataSchema, 'TakeoffData');
+var AirportData = mongoose.model('AirportData', airportDataSchema, 'AirportData');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -143,6 +155,24 @@ router.get('/data/takeoff', function(req, res, next) {
 	output += takeoffdata + "<br/>";
 	});
 		res.render('dataResult',{ title: "Takeoff Data Overview", answer: output });
+	});
+});
+
+/* GET landing page for AirportData. */
+router.get('/data/airport', function(req, res, next) {
+	AirportData.find({}, function(err,airportdatas) {
+	if(err){
+		res.send(err);
+		return console.error(err);
+	}
+	
+	var output = "";
+	
+	airportdatas.forEach(function(airportdata){
+		console.log(airportdata._id);
+	output += airportdata + "<br/>";
+	});
+		res.render('dataResult',{ title: "Airport Data Overview", answer: output });
 	});
 });
 
