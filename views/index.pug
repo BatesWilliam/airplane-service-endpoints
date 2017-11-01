@@ -2,4 +2,8 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Did you want to access the database?
+  form(action="/data")
+        input(type="submit", value="Yes")
+  form(action="/#")
+        input(type="submit", value="No")

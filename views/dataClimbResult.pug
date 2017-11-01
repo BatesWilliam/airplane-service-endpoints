@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p Answers are: <br/> <br/> !{answer}
+  form(action="/data/climb")
+        input(type="submit", value="Go back")

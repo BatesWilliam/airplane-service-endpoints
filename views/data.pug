@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Which part of the Database did you want to access?
+  form(action="/data/climb")
+        input(type="submit", value="Climb Data")
+  form(action="/data/landing")
+        input(type="submit", value="Landing Data")
+  form(action="/data/takeoff")
+        input(type="submit", value="Takeoff Data")
+  form(action="/")
+        input(type="submit", value="Go Back")
