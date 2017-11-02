@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
-var connectionstring = "mongodb://Bates:MasterPass@ds157624.mlab.com:57624/cidm4382";
+var connectionstring = "mongodb://REDACTED:REDACTED@ds157624.mlab.com:57624/cidm4382";
 mongoose.connect(connectionstring, { useMongoClient: true });
 
 mongoose.Promise = global.Promise;
